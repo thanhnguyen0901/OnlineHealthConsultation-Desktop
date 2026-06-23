@@ -1,0 +1,66 @@
+<UserControl x:Class="OnlineHealthConsultation.Desktop.Views.QuestionsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <Grid Margin="0,0,0,18">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <StackPanel>
+                <TextBlock Text="Question Inbox" Style="{StaticResource PageTitleText}" />
+                <TextBlock Text="Answer patient health questions from the shared backend service." Style="{StaticResource MutedText}" />
+            </StackPanel>
+            <Button Grid.Column="1" x:Name="Load" Content="Refresh" Style="{StaticResource SecondaryButton}" />
+            <Button Grid.Column="2" x:Name="AnswerSelected" Content="Submit Answer" Style="{StaticResource PrimaryButtonSmall}" />
+        </Grid>
+
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*" />
+                <ColumnDefinition Width="16" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <DataGrid ItemsSource="{Binding Questions}"
+                      SelectedItem="{Binding SelectedQuestion}"
+                      AutoGenerateColumns="False"
+                      IsReadOnly="True"
+                      CanUserAddRows="False"
+                      HeadersVisibility="Column"
+                      GridLinesVisibility="None">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Created" Binding="{Binding CreatedAtText}" Width="140" />
+                    <DataGridTextColumn Header="Patient" Binding="{Binding PatientName}" Width="160" />
+                    <DataGridTextColumn Header="Status" Binding="{Binding Status}" Width="110" />
+                    <DataGridTextColumn Header="Question" Binding="{Binding Content}" Width="*" />
+                </DataGrid.Columns>
+            </DataGrid>
+
+            <Border Grid.Column="2" Style="{StaticResource Panel}">
+                <StackPanel>
+                    <TextBlock Text="Selected Question" FontSize="18" FontWeight="SemiBold" />
+                    <TextBlock Text="{Binding SelectedQuestion.Content}" Margin="0,10,0,18" TextWrapping="Wrap" />
+                    <TextBlock Text="Answer" Style="{StaticResource LabelText}" />
+                    <TextBox x:Name="AnswerContent"
+                             AcceptsReturn="True"
+                             TextWrapping="Wrap"
+                             MinHeight="170"
+                             Margin="0,6,0,0" />
+                </StackPanel>
+            </Border>
+        </Grid>
+
+        <StackPanel Grid.Row="2" Margin="0,12,0,0">
+            <TextBlock Text="{Binding StatusMessage}" Style="{StaticResource SuccessText}" />
+            <TextBlock Text="{Binding ErrorMessage}" Style="{StaticResource ErrorText}" TextWrapping="Wrap" />
+        </StackPanel>
+    </Grid>
+</UserControl>
