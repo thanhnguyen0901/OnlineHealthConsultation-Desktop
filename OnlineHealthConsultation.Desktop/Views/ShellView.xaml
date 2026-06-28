@@ -46,18 +46,21 @@
                 </Grid.RowDefinitions>
                 
                 <StackPanel Grid.Row="0">
-                    <Button
+                    <RadioButton
                         x:Name="ShowDashboard"
                         Content="Tổng quan"
-                        Style="{StaticResource NavButton}" />
-                    <Button
+                        IsChecked="{Binding IsDashboardActive, Mode=OneWay}"
+                        Style="{StaticResource NavRadioButton}" />
+                    <RadioButton
                         x:Name="ShowAppointments"
                         Content="Lịch hẹn"
-                        Style="{StaticResource NavButton}" />
-                    <Button
+                        IsChecked="{Binding IsAppointmentsActive, Mode=OneWay}"
+                        Style="{StaticResource NavRadioButton}" />
+                    <RadioButton
                         x:Name="ShowQuestions"
                         Content="Hỏi đáp"
-                        Style="{StaticResource NavButton}" />
+                        IsChecked="{Binding IsQuestionsActive, Mode=OneWay}"
+                        Style="{StaticResource NavRadioButton}" />
                 </StackPanel>
 
                 <Button

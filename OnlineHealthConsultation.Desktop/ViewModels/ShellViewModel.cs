@@ -36,6 +36,18 @@ public sealed class ShellViewModel : Conductor<IScreen>.Collection.OneActive
     public string DoctorName => _session.User?.FullName ?? "Bác sĩ";
     public string ApiBaseUrl => _session.ApiBaseUrl;
 
+    public bool IsDashboardActive => ActiveItem == _dashboard;
+    public bool IsAppointmentsActive => ActiveItem == _appointments;
+    public bool IsQuestionsActive => ActiveItem == _questions;
+
+    public override async Task ActivateItemAsync(IScreen item, CancellationToken cancellationToken = default)
+    {
+        await base.ActivateItemAsync(item, cancellationToken);
+        NotifyOfPropertyChange(nameof(IsDashboardActive));
+        NotifyOfPropertyChange(nameof(IsAppointmentsActive));
+        NotifyOfPropertyChange(nameof(IsQuestionsActive));
+    }
+
     protected override async Task OnActivateAsync(CancellationToken cancellationToken)
     {
         await ActivateItemAsync(_dashboard, cancellationToken);
