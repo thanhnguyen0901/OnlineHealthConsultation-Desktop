@@ -1,0 +1,61 @@
+<Window
+    x:Class="OnlineHealthConsultation.Desktop.Views.ShellView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Title="Online Health Consultation - Doctor Workstation"
+    Width="1180"
+    Height="760"
+    WindowStartupLocation="CenterScreen">
+    <DockPanel Background="{StaticResource AppBackground}">
+        <Border
+            Padding="24,16"
+            Background="{StaticResource HeaderBackground}"
+            DockPanel.Dock="Top">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <StackPanel>
+                    <TextBlock
+                        FontSize="22"
+                        FontWeight="SemiBold"
+                        Foreground="White"
+                        Text="Doctor Workstation" />
+                    <TextBlock
+                        Margin="0,4,0,0"
+                        Foreground="#CCFFFFFF"
+                        Text="{Binding ApiBaseUrl}" />
+                </StackPanel>
+                <TextBlock
+                    Grid.Column="1"
+                    VerticalAlignment="Center"
+                    Foreground="White"
+                    Text="{Binding DoctorName}" />
+            </Grid>
+        </Border>
+
+        <Border
+            Width="220"
+            Padding="16"
+            Background="White"
+            DockPanel.Dock="Left">
+            <StackPanel>
+                <Button
+                    x:Name="ShowDashboard"
+                    Content="Dashboard"
+                    Style="{StaticResource NavButton}" />
+                <Button
+                    x:Name="ShowAppointments"
+                    Content="Appointments"
+                    Style="{StaticResource NavButton}" />
+                <Button
+                    x:Name="ShowQuestions"
+                    Content="Questions"
+                    Style="{StaticResource NavButton}" />
+            </StackPanel>
+        </Border>
+
+        <ContentControl x:Name="ActiveItem" Margin="24" />
+    </DockPanel>
+</Window>

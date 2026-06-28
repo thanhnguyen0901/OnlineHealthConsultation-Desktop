@@ -6,8 +6,6 @@
     <EnableWindowsTargeting>true</EnableWindowsTargeting>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
-    <AssemblyName>OnlineHealthConsultation.Desktop</AssemblyName>
-    <RootNamespace>OnlineHealthConsultation.Desktop</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
