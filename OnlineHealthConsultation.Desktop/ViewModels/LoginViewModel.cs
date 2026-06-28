@@ -22,7 +22,7 @@ public sealed class LoginViewModel : BaseScreen
         _session = session;
         _windowManager = windowManager;
         _serviceProvider = serviceProvider;
-        DisplayName = "Doctor Desktop Login";
+        DisplayName = "Đăng nhập Bác sĩ";
     }
 
     public string Email
@@ -61,7 +61,7 @@ public sealed class LoginViewModel : BaseScreen
 
             if (!user.Role.Equals("DOCTOR", StringComparison.OrdinalIgnoreCase))
             {
-                throw new InvalidOperationException("Desktop app is scoped for doctor accounts.");
+                throw new InvalidOperationException("Ứng dụng desktop chỉ dành cho tài khoản Bác sĩ.");
             }
 
             _session.SignIn(result.AccessToken, user);

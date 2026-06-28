@@ -2,7 +2,7 @@
     x:Class="OnlineHealthConsultation.Desktop.Views.ShellView"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    Title="Online Health Consultation - Doctor Workstation"
+    Title="Tư vấn Sức khỏe Trực tuyến - Hệ thống Bác sĩ"
     Width="1180"
     Height="760"
     WindowStartupLocation="CenterScreen">
@@ -21,17 +21,16 @@
                         FontSize="22"
                         FontWeight="SemiBold"
                         Foreground="White"
-                        Text="Doctor Workstation" />
+                        Text="Hệ thống Bác sĩ" />
                     <TextBlock
                         Margin="0,4,0,0"
                         Foreground="#CCFFFFFF"
                         Text="{Binding ApiBaseUrl}" />
                 </StackPanel>
-                <TextBlock
-                    Grid.Column="1"
-                    VerticalAlignment="Center"
-                    Foreground="White"
-                    Text="{Binding DoctorName}" />
+                <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
+                    <TextBlock Foreground="#CCFFFFFF" Text="Bác sĩ: " VerticalAlignment="Center" FontSize="14" />
+                    <TextBlock FontWeight="SemiBold" Foreground="White" Text="{Binding DoctorName}" VerticalAlignment="Center" FontSize="14" />
+                </StackPanel>
             </Grid>
         </Border>
 
@@ -40,20 +39,34 @@
             Padding="16"
             Background="White"
             DockPanel.Dock="Left">
-            <StackPanel>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                
+                <StackPanel Grid.Row="0">
+                    <Button
+                        x:Name="ShowDashboard"
+                        Content="Tổng quan"
+                        Style="{StaticResource NavButton}" />
+                    <Button
+                        x:Name="ShowAppointments"
+                        Content="Lịch hẹn"
+                        Style="{StaticResource NavButton}" />
+                    <Button
+                        x:Name="ShowQuestions"
+                        Content="Hỏi đáp"
+                        Style="{StaticResource NavButton}" />
+                </StackPanel>
+
                 <Button
-                    x:Name="ShowDashboard"
-                    Content="Dashboard"
-                    Style="{StaticResource NavButton}" />
-                <Button
-                    x:Name="ShowAppointments"
-                    Content="Appointments"
-                    Style="{StaticResource NavButton}" />
-                <Button
-                    x:Name="ShowQuestions"
-                    Content="Questions"
-                    Style="{StaticResource NavButton}" />
-            </StackPanel>
+                    x:Name="Logout"
+                    Grid.Row="1"
+                    Content="Đăng xuất"
+                    Style="{StaticResource SecondaryButton}"
+                    Margin="0" />
+            </Grid>
         </Border>
 
         <ContentControl x:Name="ActiveItem" Margin="24" />

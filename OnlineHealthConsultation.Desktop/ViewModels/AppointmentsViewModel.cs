@@ -1,6 +1,10 @@
 using Caliburn.Micro;
 using OnlineHealthConsultation.Desktop.Models;
 using OnlineHealthConsultation.Desktop.Services;
+using System;
+using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace OnlineHealthConsultation.Desktop.ViewModels;
 
@@ -13,10 +17,11 @@ public sealed class AppointmentsViewModel : BaseScreen
     public AppointmentsViewModel(IApiClient apiClient)
     {
         _apiClient = apiClient;
-        DisplayName = "Appointments";
+        DisplayName = "Lịch hẹn";
+        StatusFilter = "Tất cả";
     }
 
-    public BindableCollection<string> StatusFilters { get; } = ["All", "Pending", "Confirmed", "Completed", "Cancelled"];
+    public BindableCollection<string> StatusFilters { get; } = ["Tất cả", "Chờ xác nhận", "Đã xác nhận", "Đã hoàn thành", "Đã hủy"];
     public BindableCollection<AppointmentDto> Appointments { get; } = [];
 
     public AppointmentDto? SelectedAppointment
@@ -38,6 +43,7 @@ public sealed class AppointmentsViewModel : BaseScreen
         {
             _statusFilter = value;
             NotifyOfPropertyChange();
+            _ = Load();
         }
     }
 
@@ -55,10 +61,10 @@ public sealed class AppointmentsViewModel : BaseScreen
         {
             var backendStatus = StatusFilter switch
             {
-                "Pending" => "PENDING_CONFIRMATION",
-                "Confirmed" => "CONFIRMED",
-                "Completed" => "COMPLETED",
-                "Cancelled" => "CANCELLED",
+                "Chờ xác nhận" => "PENDING_CONFIRMATION",
+                "Đã xác nhận" => "CONFIRMED",
+                "Đã hoàn thành" => "COMPLETED",
+                "Đã hủy" => "CANCELLED",
                 _ => null
             };
             var items = await _apiClient.GetDoctorAppointmentsAsync(backendStatus);
@@ -78,7 +84,7 @@ public sealed class AppointmentsViewModel : BaseScreen
         {
             await _apiClient.ConfirmAppointmentAsync(SelectedAppointment.Id);
             await Load();
-        }, "Appointment confirmed.");
+        }, "Đã xác nhận lịch hẹn khám.");
     }
 
     public async Task CompleteSelected()
@@ -92,6 +98,6 @@ public sealed class AppointmentsViewModel : BaseScreen
         {
             await _apiClient.CompleteAppointmentAsync(SelectedAppointment.Id);
             await Load();
-        }, "Appointment completed.");
+        }, "Đã hoàn thành lịch hẹn khám.");
     }
 }

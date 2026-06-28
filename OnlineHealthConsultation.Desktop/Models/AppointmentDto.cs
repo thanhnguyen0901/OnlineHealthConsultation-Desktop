@@ -13,4 +13,13 @@ public sealed class AppointmentDto
     public string ScheduledAtText => ScheduledAt?.LocalDateTime.ToString("dd/MM/yyyy HH:mm") ?? "-";
     public bool CanConfirm => Status.Equals("PENDING_CONFIRMATION", StringComparison.OrdinalIgnoreCase);
     public bool CanComplete => Status.Equals("CONFIRMED", StringComparison.OrdinalIgnoreCase);
+
+    public string StatusText => Status.ToUpper() switch
+    {
+        "PENDING_CONFIRMATION" => "Chờ xác nhận",
+        "CONFIRMED" => "Đã xác nhận",
+        "COMPLETED" => "Đã hoàn thành",
+        "CANCELLED" => "Đã hủy",
+        _ => Status
+    };
 }

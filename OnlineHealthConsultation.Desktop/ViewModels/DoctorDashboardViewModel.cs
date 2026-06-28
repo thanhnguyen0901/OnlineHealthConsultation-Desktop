@@ -13,7 +13,7 @@ public sealed class DoctorDashboardViewModel : BaseScreen
     public DoctorDashboardViewModel(IApiClient apiClient)
     {
         _apiClient = apiClient;
-        DisplayName = "Dashboard";
+        DisplayName = "Tổng quan";
     }
 
     public DoctorProfileDto? Profile
@@ -28,8 +28,8 @@ public sealed class DoctorDashboardViewModel : BaseScreen
         }
     }
 
-    public string DoctorName => Profile?.User?.FullName ?? "Doctor";
-    public string SpecialtyText => Profile?.Specialties.FirstOrDefault()?.Specialty?.NameVi ?? "Chua cap nhat";
+    public string DoctorName => Profile?.User?.FullName ?? "Bác sĩ";
+    public string SpecialtyText => Profile?.Specialties.FirstOrDefault()?.Specialty?.NameVi ?? "Chưa cập nhật";
 
     public int AppointmentCount
     {

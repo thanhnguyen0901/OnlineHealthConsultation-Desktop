@@ -13,7 +13,7 @@ public sealed class QuestionsViewModel : BaseScreen
     public QuestionsViewModel(IApiClient apiClient)
     {
         _apiClient = apiClient;
-        DisplayName = "Questions";
+        DisplayName = "Hỏi đáp";
     }
 
     public BindableCollection<QuestionDto> Questions { get; } = [];
@@ -73,6 +73,6 @@ public sealed class QuestionsViewModel : BaseScreen
             await _apiClient.AnswerQuestionAsync(SelectedQuestion.Id, AnswerContent.Trim());
             AnswerContent = string.Empty;
             await Load();
-        }, "Answer submitted.");
+        }, "Đã gửi câu trả lời khám bệnh.");
     }
 }

@@ -6,14 +6,14 @@
         <Grid Margin="0,0,0,18" DockPanel.Dock="Top">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="140" />
+                <ColumnDefinition Width="150" />
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
             <StackPanel>
-                <TextBlock Style="{StaticResource PageTitleText}" Text="Appointments" />
-                <TextBlock Style="{StaticResource MutedText}" Text="Manage doctor appointment workflow from the desktop client." />
+                <TextBlock Style="{StaticResource PageTitleText}" Text="Danh sách Lịch hẹn" />
+                <TextBlock Style="{StaticResource MutedText}" Text="Quản lý quy trình lịch hẹn khám bệnh của bác sĩ." />
             </StackPanel>
             <ComboBox
                 x:Name="StatusFilter"
@@ -25,17 +25,17 @@
             <Button
                 x:Name="Load"
                 Grid.Column="2"
-                Content="Refresh"
+                Content="Làm mới"
                 Style="{StaticResource SecondaryButton}" />
             <Button
                 x:Name="ConfirmSelected"
                 Grid.Column="3"
-                Content="Confirm"
+                Content="Xác nhận"
                 Style="{StaticResource SecondaryButton}" />
             <Button
                 x:Name="CompleteSelected"
                 Grid.Column="4"
-                Content="Complete"
+                Content="Hoàn thành"
                 Style="{StaticResource PrimaryButtonSmall}" />
         </Grid>
 
@@ -58,23 +58,23 @@
                 <DataGridTextColumn
                     Width="150"
                     Binding="{Binding ScheduledAtText}"
-                    Header="Time" />
+                    Header="Thời gian" />
                 <DataGridTextColumn
                     Width="180"
                     Binding="{Binding PatientName}"
-                    Header="Patient" />
+                    Header="Bệnh nhân" />
                 <DataGridTextColumn
                     Width="160"
-                    Binding="{Binding Status}"
-                    Header="Status" />
+                    Binding="{Binding StatusText}"
+                    Header="Trạng thái" />
                 <DataGridTextColumn
                     Width="*"
                     Binding="{Binding Reason}"
-                    Header="Reason" />
+                    Header="Lý do khám" />
                 <DataGridTextColumn
                     Width="*"
                     Binding="{Binding Notes}"
-                    Header="Notes" />
+                    Header="Ghi chú" />
             </DataGrid.Columns>
         </DataGrid>
     </DockPanel>
