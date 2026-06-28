@@ -1,4 +1,5 @@
 using Caliburn.Micro;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using OnlineHealthConsultation.Desktop.Services;
 using OnlineHealthConsultation.Desktop.ViewModels;
@@ -17,11 +18,29 @@ public sealed class Bootstrapper : BootstrapperBase
 
     protected override void Configure()
     {
+        var builder = new ConfigurationBuilder()
+            .SetBasePath(AppDomain.CurrentDomain.BaseDirectory)
+            .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
+
+        IConfiguration configuration = builder.Build();
+
         var services = new ServiceCollection();
 
+        services.AddSingleton(configuration);
         services.AddSingleton<IWindowManager, WindowManager>();
         services.AddSingleton<IEventAggregator, EventAggregator>();
-        services.AddSingleton<IAuthSession, AuthSession>();
+        
+        services.AddSingleton<IAuthSession>(provider =>
+        {
+            var authSession = new AuthSession();
+            var apiBaseUrl = configuration["ApiBaseUrl"];
+            if (!string.IsNullOrWhiteSpace(apiBaseUrl))
+            {
+                authSession.ApiBaseUrl = apiBaseUrl.Trim();
+            }
+            return authSession;
+        });
+
         services.AddSingleton<IApiClient, ApiClient>();
         services.AddTransient<LoginViewModel>();
         services.AddTransient<ShellViewModel>();

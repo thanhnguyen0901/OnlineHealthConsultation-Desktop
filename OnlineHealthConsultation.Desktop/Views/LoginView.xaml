@@ -4,7 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     Title="Doctor Desktop Login"
     Width="460"
-    Height="520"
+    Height="450"
     ResizeMode="NoResize"
     WindowStartupLocation="CenterScreen">
     <Grid Margin="28" Background="{StaticResource AppBackground}">
@@ -23,9 +23,6 @@
 
         <Border Grid.Row="1" Style="{StaticResource Panel}">
             <StackPanel>
-                <TextBlock Style="{StaticResource LabelText}" Text="API Base URL" />
-                <TextBox x:Name="ApiBaseUrl" Margin="0,6,0,16" />
-
                 <TextBlock Style="{StaticResource LabelText}" Text="Doctor Email" />
                 <TextBox x:Name="Email" Margin="0,6,0,16" />
 

@@ -9,7 +9,6 @@ public sealed class LoginViewModel : BaseScreen
     private readonly IAuthSession _session;
     private readonly IWindowManager _windowManager;
     private readonly IServiceProvider _serviceProvider;
-    private string _apiBaseUrl;
     private string _email = "doctor.e2e@healthcare.local";
     private string _password = "Doctor@123";
 
@@ -23,19 +22,7 @@ public sealed class LoginViewModel : BaseScreen
         _session = session;
         _windowManager = windowManager;
         _serviceProvider = serviceProvider;
-        _apiBaseUrl = session.ApiBaseUrl;
         DisplayName = "Doctor Desktop Login";
-    }
-
-    public string ApiBaseUrl
-    {
-        get => _apiBaseUrl;
-        set
-        {
-            _apiBaseUrl = value;
-            NotifyOfPropertyChange();
-            NotifyOfPropertyChange(nameof(CanLogin));
-        }
     }
 
     public string Email
@@ -62,7 +49,6 @@ public sealed class LoginViewModel : BaseScreen
 
     public bool CanLogin =>
         !IsBusy &&
-        !string.IsNullOrWhiteSpace(ApiBaseUrl) &&
         !string.IsNullOrWhiteSpace(Email) &&
         !string.IsNullOrWhiteSpace(Password);
 
@@ -70,7 +56,6 @@ public sealed class LoginViewModel : BaseScreen
     {
         await RunBusyAsync(async () =>
         {
-            _session.ApiBaseUrl = ApiBaseUrl.Trim();
             var result = await _apiClient.LoginAsync(Email.Trim(), Password);
             var user = result.User!;
 
